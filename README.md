@@ -3,6 +3,10 @@ python3 -m virtualenv venv
 source venv/bin/activate
 
 pip install django
+# for mysql client need to install
+sudo apt-get install python3-dev
+
+pip install mysqlclient
 
 django-admin startproject todo .
 
@@ -23,7 +27,9 @@ sudo systemctl start mysql
 #set authenication
 
 UPDATE mysql.user SET authentication_string = PASSWORD('password') WHERE User = 'root';
-
+CREATE USER 'djangodb'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON * . * TO 'djangodb'@'localhost';
+FLUSH PRIVILEGES;
 #apply changes
 
 FLUSH PRIVILEGES;
